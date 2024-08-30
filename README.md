@@ -179,10 +179,6 @@ This will reinitialize the database with the default data.
 - **Port Conflicts**: Ensure that port `3000` is not being used by another application.
 - **Missing Dependencies**: Run `npm install` in both the `self-modifying-app` and `client` directories if you encounter missing module errors.
 
-## Contributions
-
-Feel free to open issues or submit pull requests for improvements or bug fixes.
-
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the Unlicense license. See the `LICENSE` file for details.
