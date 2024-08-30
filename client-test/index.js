@@ -18,24 +18,6 @@ async function checkForUpdates() {
       console.log(`- ${file.os}: ${file.download_url}`);
     });
 
-    const questions = [
-      {
-        type: 'confirm',
-        name: 'update',
-        message: `Would you like to download the latest version (${version.version})?`,
-        default: true,
-      },
-    ];
-
-    const answers = await inquirer.prompt(questions);
-
-    if (answers.update) {
-      // Simulate download
-      console.log('Downloading the latest version...');
-      // Add code to download and apply the update
-    } else {
-      console.log('Update skipped.');
-    }
   } catch (error) {
     console.error('Failed to check for updates:', error.message);
   }

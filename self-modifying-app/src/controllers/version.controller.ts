@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { VersionService } from 'src/services/version.service';
-import { Version } from 'src/entities/version.entity';
+import { Version } from '../entities/version.entity';
 
 @Controller('version')
 export class VersionController {
@@ -8,17 +8,16 @@ export class VersionController {
 
   @Get('latest')
   async getLatestVersion(@Query('os') os: string): Promise<Version> {
-    const version = await this.versionService.findLatestVersion();
-    console.log(version);
+    if (!os) {
+      throw new Error('OS parameter is required');
+    }
+
+    const version = await this.versionService.findLatestVersionByOS(os);
+
     if (!version) {
-      return null;
+      throw new Error(`No version found for OS: ${os}`);
     }
 
-    if (os) {
-      version.files = version.files.filter(file => file.os === os);
-    }
-
-   
     return version;
   }
 }

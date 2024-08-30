@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 import { Version } from '../entities/version.entity';
 
 @Injectable()
@@ -10,18 +10,18 @@ export class VersionService {
     private readonly versionRepository: Repository<Version>,
   ) {}
 
-  async findLatestVersion(): Promise<Version | undefined> {
-    const versions = await this.versionRepository.find({
-      relations: ['files'],
-      order: { release_date: 'DESC' },
-      take: 1,
-    });
-    return versions[0]; // Return the latest version
-  }
-  
+  async findLatestVersionByOS(os: string): Promise<Version> {
+       // Query for the latest version that has files for the specified OS
+       const latestVersionWithFilesForOS = await this.versionRepository.createQueryBuilder('version')
+       .leftJoinAndSelect('version.files', 'file', 'file.os = :os', { os })
+       .where('file.os = :os', { os })
+       .orderBy('version.release_date', 'DESC')
+       .getOne();
+ 
+     if (latestVersionWithFilesForOS) {
+       return latestVersionWithFilesForOS;
+     }
 
-  async createVersion(versionData: Partial<Version>): Promise<Version> {
-    const newVersion = this.versionRepository.create(versionData);
-    return this.versionRepository.save(newVersion);
+     
   }
 }
