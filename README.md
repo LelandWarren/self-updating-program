@@ -3,7 +3,7 @@
 This repository is a prototype for a self-updating application. It includes a backend API for managing software versions and a simple client script that checks for updates based on the operating system.
 
 ## Table of Contents
-
+- [Project Proposal](#project-proposal)
 - [Project Structure](#project-structure)
 - [Prerequisites](#prerequisites)
 - [Setup and Installation](#setup-and-installation)
@@ -12,6 +12,11 @@ This repository is a prototype for a self-updating application. It includes a ba
 - [API Endpoints](#api-endpoints)
 - [Testing the Application](#testing-the-application)
 - [Troubleshooting](#troubleshooting)
+
+## Project Proposal
+
+For a detailed engineering proposal outlining the implementation, assumptions, and next steps, please refer to the [Project Proposal](./proposal.md).
+
 
 ## Project Structure
 
